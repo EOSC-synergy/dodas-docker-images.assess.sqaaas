@@ -1,0 +1,74 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/DODAS-TS/dodas-docker-images:
+      branch: master
+      repo: https://github.com/DODAS-TS/dodas-docker-images
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-sepia-indri.sh
+        container: qc.acc_scanty-teal-budgerigar
+  QC.Doc:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-orchid-goat.sh
+        container: qc.doc_scanty-magenta-neanderthal
+      github.com/DODAS-TS/dodas-docker-images git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-jade-squirt.sh
+        container: qc.doc_gloppy-black-wrasse
+      github.com/DODAS-TS/dodas-docker-images markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-maroon-monster.sh
+        container: qc.doc_slimy-dandelion-koala
+  QC.Lic:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-celadon-chinchilla.sh
+        container: qc.lic_sleepy-myrtle-flamingo
+  QC.Sec:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-crimson-mongoose.sh
+        container: qc.sec_nerdy-plum-discus
+      github.com/DODAS-TS/dodas-docker-images gosec:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-zucchini-yak.sh
+        container: qc.sec_lousy-denim-greyhound
+  QC.Sty:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-bronze-bongo.sh
+        container: qc.sty_queasy-crimson-lemur
+      github.com/DODAS-TS/dodas-docker-images hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-heliotrope-stingray.sh
+        container: qc.sty_slaphappy-coral-zebra
+      github.com/DODAS-TS/dodas-docker-images jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-scarlet-falcon.sh
+        container: qc.sty_snippy-platinum-eleuth
+      github.com/DODAS-TS/dodas-docker-images staticcheck:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-pumpkin-monkey.sh
+        container: qc.sty_sunny-cornflower-dane
+  QC.Ver:
+    repos:
+      github.com/DODAS-TS/dodas-docker-images get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-plum-mau.sh
+        container: qc.ver_stinky-denim-hamster
+timeout: 5400
